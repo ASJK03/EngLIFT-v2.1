@@ -1159,5 +1159,7 @@
         <item quantity="one">{v} candidate</item>
         <item quantity="other">{v} candidates</item>
     </plurals>
+    <string name="key__text_enhance">✨ Enhance</string>
+<string name="quick_action__text_enhance">Enhance with AI</string>
 
 </resources>
