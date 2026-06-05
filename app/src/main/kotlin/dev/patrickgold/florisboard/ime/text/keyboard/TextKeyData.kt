@@ -149,6 +149,7 @@ data class TextKeyData(
                 TOGGLE_ACTIONS_EDITOR,
                 TOGGLE_INCOGNITO_MODE,
                 TOGGLE_AUTOCORRECT,
+                TEXT_ENHANCE,
             )
         }
 
