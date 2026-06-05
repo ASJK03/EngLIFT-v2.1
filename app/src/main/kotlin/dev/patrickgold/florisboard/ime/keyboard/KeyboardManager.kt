@@ -25,6 +25,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 import dev.patrickgold.florisboard.FlorisImeService
 import dev.patrickgold.florisboard.R
+import dev.patrickgold.florisboard.ime.enhance.GeminiEnhanceService
 import dev.patrickgold.florisboard.app.FlorisPreferenceStore
 import dev.patrickgold.florisboard.appContext
 import dev.patrickgold.florisboard.clipboardManager
