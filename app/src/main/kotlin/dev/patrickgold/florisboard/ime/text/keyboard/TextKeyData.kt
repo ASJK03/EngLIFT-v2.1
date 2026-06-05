@@ -493,6 +493,12 @@ data class TextKeyData(
             code = KeyCode.SETTINGS,
             label = "settings",
         )
+        /** Predefined key data for [KeyCode.TEXT_ENHANCE] */
+        val TEXT_ENHANCE = TextKeyData(
+            type = KeyType.FUNCTION,
+            code = KeyCode.TEXT_ENHANCE,
+            label = "text_enhance",
+        )
 
         /** Predefined key data for [KeyCode.VOICE_INPUT] */
         val VOICE_INPUT = TextKeyData(
