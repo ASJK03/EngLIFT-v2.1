@@ -52,6 +52,7 @@ fun TextInputLayout(
 
     val state by keyboardManager.activeState.collectAsState()
     val evaluator by keyboardManager.activeEvaluator.collectAsState()
+    val enhanceManager = remember { EnhanceManager(LocalContext.current) }
 
     InlineSuggestionsStyleCache()
 
