@@ -45,7 +45,7 @@ class EnhanceManager(context: Context) {
         private const val PREFS_NAME        = "englift_enhance"
         private const val KEY_COUNT         = "daily_count"
         private const val KEY_DATE          = "count_date"
-        private const val FREE_LIMIT        = 20
+        private const val FREE_LIMIT        = 10
         private const val TIMEOUT_MS        = 15_000          // 15 s
         private val DATE_FMT = SimpleDateFormat("yyyy-MM-dd", Locale.US)
     }
