@@ -38,8 +38,10 @@ import dev.patrickgold.florisboard.ime.theme.FlorisImeUi
 import dev.patrickgold.florisboard.keyboardManager
 import dev.patrickgold.jetpref.datastore.model.collectAsState
 import org.florisboard.lib.snygg.ui.SnyggIcon
-
+import dev.patrickgold.florisboard.ime.enhance.EnhanceButton
+import dev.patrickgold.florisboard.ime.enhance.EnhanceManager
 @Composable
+
 fun TextInputLayout(
     modifier: Modifier = Modifier,
 ) {
