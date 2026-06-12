@@ -25,7 +25,6 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 import dev.patrickgold.florisboard.FlorisImeService
 import dev.patrickgold.florisboard.R
-import dev.patrickgold.florisboard.ime.enhance.GeminiEnhanceService
 import dev.patrickgold.florisboard.app.FlorisPreferenceStore
 import dev.patrickgold.florisboard.appContext
 import dev.patrickgold.florisboard.clipboardManager
@@ -742,7 +741,6 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
             KeyCode.IME_UI_MODE_MEDIA -> activeState.imeUiMode = ImeUiMode.MEDIA
             KeyCode.IME_UI_MODE_CLIPBOARD -> activeState.imeUiMode = ImeUiMode.CLIPBOARD
             KeyCode.VOICE_INPUT -> FlorisImeService.switchToVoiceInputMethod()
-            KeyCode.TEXT_ENHANCE -> scope.launch { handleTextEnhance() }
             KeyCode.KANA_SWITCHER -> handleKanaSwitch()
             KeyCode.KANA_HIRA -> handleKanaHira()
             KeyCode.KANA_KATA -> handleKanaKata()
@@ -850,48 +848,6 @@ class KeyboardManager(context: Context) : InputKeyEventReceiver {
             KeyCode.MOVE_END_OF_LINE -> handleArrow(data.code)
             else -> onInputKeyUp(data)
         }
-        
-    /**
-     * When user presses the Enhance button, this function runs
-     */
-    private suspend fun handleTextEnhance() {
-        // Get the text the user typed (up to 256 characters)
-        val currentText = editorInstance.activeContent.getTextBeforeCursor(256).trim()
-        
-        // Check if there's actually text to enhance
-        if (currentText.isEmpty()) {
-            appContext.showShortToastSync("No text to enhance")
-            return
-        }
-
-        // Show message that we're working on it
-        appContext.showShortToastSync("Enhancing text...")
-
-        // Create the AI service
-        val geminiService = GeminiEnhanceService(appContext)
-        
-        // Call the AI with the text
-        val result = geminiService.enhanceText(currentText)
-
-        // Check if it was successful
-        result.onSuccess { enhancedText ->
-            // Delete all the old text (one character at a time)
-            repeat(currentText.length) {
-                editorInstance.deleteBackwards(OperationUnit.CHARACTERS)
-            }
-            
-            // Put the new, enhanced text
-            editorInstance.commitText(enhancedText)
-            
-            // Show success message
-            appContext.showShortToastSync("Text enhanced!")
-        }
-
-        // If something went wrong
-        result.onFailure { error ->
-            appContext.showShortToastSync("Error: ${error.message}")
-        }
-    }
     }
 
     private fun reevaluateDebugFlags() {
