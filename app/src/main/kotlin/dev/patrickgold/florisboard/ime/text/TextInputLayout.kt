@@ -20,12 +20,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.remember
-import androidx.compose.ui.unit.dp
-import dev.patrickgold.florisboard.ime.FlorisImeService
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -44,10 +38,8 @@ import dev.patrickgold.florisboard.ime.theme.FlorisImeUi
 import dev.patrickgold.florisboard.keyboardManager
 import dev.patrickgold.jetpref.datastore.model.collectAsState
 import org.florisboard.lib.snygg.ui.SnyggIcon
-import dev.patrickgold.florisboard.ime.enhance.EnhanceButton
-import dev.patrickgold.florisboard.ime.enhance.EnhanceManager
-@Composable
 
+@Composable
 fun TextInputLayout(
     modifier: Modifier = Modifier,
 ) {
@@ -58,7 +50,6 @@ fun TextInputLayout(
 
     val state by keyboardManager.activeState.collectAsState()
     val evaluator by keyboardManager.activeEvaluator.collectAsState()
-    val enhanceManager = remember { EnhanceManager(LocalContext.current) }
 
     InlineSuggestionsStyleCache()
 
@@ -67,32 +58,7 @@ fun TextInputLayout(
             .fillMaxWidth()
             .wrapContentHeight(),
     ) {
-        Row(
-    modifier = Modifier.fillMaxWidth(),
-    verticalAlignment = Alignment.CenterVertically,
-) {
-    EnhanceButton(
-        enhanceManager = enhanceManager,
-        getCurrentText = {
-            val ic = FlorisImeService.currentInputConnection()
-            val selected = ic?.getSelectedText(0)?.toString()
-            if (!selected.isNullOrBlank()) selected
-            else ic?.getExtractedText(android.view.inputmethod.ExtractedTextRequest(), 0)
-                    ?.text?.toString() ?: ""
-        },
-        onTextEnhanced = { enhanced ->
-            val ic = FlorisImeService.currentInputConnection() ?: return@EnhanceButton
-            ic.beginBatchEdit()
-            ic.performContextMenuAction(android.R.id.selectAll)
-            ic.commitText(enhanced, 1)
-            ic.endBatchEdit()
-        },
-        modifier = Modifier.padding(start = 6.dp, end = 4.dp),
-    )
-    Smartbar(modifier = Modifier.weight(1f))
-}
-        
-        }
+        Smartbar()
         if (state.isActionsOverflowVisible) {
             QuickActionsOverflowPanel()
         } else {
