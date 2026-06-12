@@ -62,29 +62,7 @@ fun TextInputLayout(
             .wrapContentHeight(),
     ) {
         Smartbar()
-             Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            EnhanceButton(
-                enhanceManager = enhanceManager,
-                getCurrentText = {
-                    val ic = FlorisImeService.currentInputConnection()
-                    val selected = ic?.getSelectedText(0)?.toString()
-                    if (!selected.isNullOrBlank()) selected
-                    else ic?.getExtractedText(android.view.inputmethod.ExtractedTextRequest(), 0)
-                            ?.text?.toString() ?: ""
-                },
-                onTextEnhanced = { enhanced ->
-                    val ic = FlorisImeService.currentInputConnection() ?: return@EnhanceButton
-                    ic.beginBatchEdit()
-                    ic.performContextMenuAction(android.R.id.selectAll)
-                    ic.commitText(enhanced, 1)
-                    ic.endBatchEdit()
-                },
-                modifier = Modifier.padding(start = 6.dp, end = 4.dp),
-            )
-            Smartbar(modifier = Modifier.weight(1f))
+        
         }
         if (state.isActionsOverflowVisible) {
             QuickActionsOverflowPanel()
