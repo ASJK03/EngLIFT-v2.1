@@ -39,7 +39,7 @@ class EnhanceManager(context: Context) {
 
     companion object {
         private const val BACKEND_URL =
-            "https://script.google.com/macros/s/AKfycbxjlZ2DZF2vyZX4AfcVyBHwCi9gODhHxbLtGm0NQjEWN-yOwTxpH4_Z2Fzr9abYbZmqUA/exec"
+            "https://script.google.com/macros/s/AKfycbzzdd0b9O6_ZJ1QqEsuYm7qlIpf0OV7x4KC-RFiDB_qKes29TqL65TB6XzVvzAsB2V_jQ/exec"
 
         private const val PREFS_NAME        = "englift_enhance"
         private const val KEY_COUNT         = "daily_count"
