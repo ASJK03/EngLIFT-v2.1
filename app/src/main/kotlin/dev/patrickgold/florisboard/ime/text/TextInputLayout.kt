@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import dev.patrickgold.florisboard.R
 import dev.patrickgold.florisboard.app.FlorisPreferenceStore
+import dev.patrickgold.florisboard.editorInstance
 import dev.patrickgold.florisboard.ime.enhance.EnhanceButton
 import dev.patrickgold.florisboard.ime.enhance.EnhanceManager
 import dev.patrickgold.florisboard.ime.smartbar.IncognitoDisplayMode
@@ -39,7 +40,7 @@ fun TextInputLayout(
     val prefs by FlorisPreferenceStore
     val state by keyboardManager.activeState.collectAsState()
     val evaluator by keyboardManager.activeEvaluator.collectAsState()
-    val editorInstance by context.editorInstance()
+    val editorInstance = remember { context.editorInstance().value }
     val enhanceManager = remember { EnhanceManager(context) }
 
     InlineSuggestionsStyleCache()
@@ -58,9 +59,9 @@ fun TextInputLayout(
                 enhanceManager = enhanceManager,
                 getCurrentText = {
                     val content = editorInstance.activeContent
-                    val selected = content.selectedText.toString()
+                    val selected = content.selectedText
                     if (selected.isNotBlank()) selected
-                    else content.text.toString()
+                    else content.text
                 },
                 onTextEnhanced = { enhanced ->
                     editorInstance.commitText(enhanced)
