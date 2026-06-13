@@ -226,15 +226,6 @@ dependencies {
     testImplementation(libs.turbine)
     androidTestImplementation(libs.androidx.test.ext)
     androidTestImplementation(libs.androidx.test.espresso.core)
-// For secure storage of API key
-implementation("androidx.security:security-crypto:1.1.0-alpha06")
-
-// For internet requests
-implementation("com.squareup.okhttp3:okhttp:4.11.0")
-
-// For reading/writing JSON data
-implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-}
 
 fun getGitCommitHash(short: Boolean = false): Provider<String> {
     if (!File(".git").exists()) {
